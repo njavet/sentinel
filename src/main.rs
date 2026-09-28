@@ -8,9 +8,14 @@ fn main() {
         println!("Problem parsing arguments: {err}");
         process::exit(1);
     });
+    run(config);
 
-    //let contents = fs::read_to_string(file_path).expect("file read error");
 }
+
+fn run(config: Config) {
+    let contents = fs::read_to_string(file_path).expect("file read error");
+}
+
 
 struct Config {
     query: String,
