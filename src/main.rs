@@ -22,8 +22,8 @@ fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let results = if config.ignore_case {
         search_case_insensitive(&config.query, &contents)
     } else {
-        search(&config.query, &contents) {
-    }
+        search(&config.query, &contents) 
+    };
     for line in results {
         println!("{line}");
     }
@@ -43,12 +43,14 @@ impl Config {
         }
         //let query = args[1].clone();
         //let file_path = args[2].clone();
-        let query = &args[1];
-        let file_path = &args[2];
+        let query = &args[1].to_string();
+        let file_path = &args[2].to_string();
+        let ignore_case = env::var("IGNORE_CASE").is_ok();
         // vs clone ?
         Ok(Config {
-            query: query.to_string(),
-            file_path: file_path.to_string(),
+            query,
+            file_path,
+            ignore_case,
         })
     }
 }
