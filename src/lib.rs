@@ -1,4 +1,3 @@
-
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let mut result = Vec::new();
     for line in contents.lines() {
@@ -11,9 +10,13 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let mut result = Vec::new();
+    for line in contents.lines() {
+        if line.to_lowercase().contains(&query.to_lowercase()) {
+            result.push(line);
+        }
+    }
     result
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -25,7 +28,8 @@ mod tests {
         let contents = "\
 Rust:
 safe, fast, productive.
-pick three.";
+pick three.
+Duct tape.";
 
         assert_eq!(vec!["safe, fast, productive."], search(query, contents));
     }
@@ -44,4 +48,3 @@ Trust me.";
         );
     }
 }
-
