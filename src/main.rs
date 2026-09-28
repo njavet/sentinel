@@ -43,8 +43,8 @@ impl Config {
         }
         //let query = args[1].clone();
         //let file_path = args[2].clone();
-        let query = &args[1].to_string();
-        let file_path = &args[2].to_string();
+        let query = args[1].clone();
+        let file_path = args[2].clone();
         let ignore_case = env::var("IGNORE_CASE").is_ok();
         // vs clone ?
         Ok(Config {
